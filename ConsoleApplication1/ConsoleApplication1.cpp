@@ -116,7 +116,7 @@ int main()
 	Point d(5, 6);
 
 	Line l1(a, b);
-	Line l2(c, d);
+	Line l2(c, d);//
 	cout << l1.isintersec(l2) << endl;
 
 	return 0;
