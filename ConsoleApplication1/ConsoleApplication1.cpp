@@ -142,6 +142,42 @@ public:
 		//else return false;*/
 	}
 	bool IsIntersecSegments(Line l1) {
+		float x2_ = l1.b.get()[0] - l1.a.get()[0];
+		float y2_ = l1.b.get()[1] - l1.a.get()[1];
+		float x1_ = b.get()[0] - a.get()[0];
+		float y1_ = b.get()[1] - a.get()[1];
+		
+		float x, y;
+
+		float d_inf = (y1_ * x2_ - y2_ * x1_);
+
+
+		int code = IsIntersecLine(l1);
+		switch (code)
+		{
+			case 0:
+			{
+				float d_ = x1_ * x2_ / d_inf;
+				x = d_ * ((-l1.a.get()[0] * y2_ + l1.a.get()[1] * x2_) / x2_ - (-a.get()[0] * y1_ + a.get()[1] * x1_) / x1_);
+				y = ((x - a.get()[0]) * y1_ + a.get()[1] * x2_) / x1_;
+				if (((a.get()[0] <= x && x <= b.get()[0]) || (b.get()[0] <= x && x <= a.get()[0])) && ((l1.a.get()[0] <= x && x <= l1.b.get()[0]) || (l1.b.get()[0] <= x && x <= l1.a.get()[0]))) {
+					if (((a.get()[1] <= x && x <= b.get()[1]) || (b.get()[1] <= x && x <= a.get()[1])) && ((l1.a.get()[1] <= x && x <= l1.b.get()[1]) || (l1.b.get()[1] <= x && x <= l1.a.get()[1]))) {
+						return true;
+					}
+				}
+				else
+				{
+					return false;
+				}
+			}
+			case 1:
+			{
+				
+			}
+			case 2:
+				return false;
+		}
+		
 
 	}
 };
