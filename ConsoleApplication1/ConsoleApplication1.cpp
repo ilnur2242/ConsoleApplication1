@@ -84,6 +84,7 @@ public:
 		}
 		
 	}
+	
 	bool IsIntersecSegments(Line l1) {
 		float x2_ = l1.b.get()[0] - l1.a.get()[0];
 		float y2_ = l1.b.get()[1] - l1.a.get()[1];
@@ -131,7 +132,13 @@ public:
 		
 
 	}
+
+	
 };
+
+Point CoordSegmentCenter(Point A, Point B);
+
+Point CoordCircleCenterAboutTrig(Point A, Point B);
 
 int main()
 {
@@ -139,8 +146,8 @@ int main()
 	Point a(0, 0);
 	Point b(1, 0);
 
-	Point c(2,0);
-	Point d(4, 0);
+	Point c(0,1);
+	Point d(1, 2);
 
 	Line l1(a, b);
 	Line l2(c, d);//
@@ -151,4 +158,23 @@ int main()
 	//Point r = l1.IsIntersecLine(l2);
 
 	return 0;
+}
+
+Point CoordSegmentCenter(Point A, Point B) 
+{
+	float x, y;
+	float ax = A.get()[0], ay = A.get()[1], bx = B.get()[0], by = B.get()[1];
+	vector<float> b = { B.get()[0] - A.get()[0] ,B.get()[1] - A.get()[1] };
+	float k = b[1] / b[0];
+	float m = -k * ay / ax + ay;
+	float m1 = m - ay, m2 = m - by;
+
+	x = (bx * bx + m2 * m2 - ax * ax - m1 * m1) / (2 * bx + 2 * k * m2 - 2 * ax - 2 * k * m1);
+	y = k * x + m;
+	return Point(x,y);
+}
+
+Point CoordCircleCenterAboutTrig(Point A, Point B)
+{
+	
 }
