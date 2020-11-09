@@ -5,58 +5,66 @@
 
 using namespace std;
 
+
+
+
+template <typename T>
 class Point
 {
 private:
-	float x, y;
+	T x, y;
 
 public:
 	Point() {
+
+		
 		x = 0.;
 		y = 0.;
 	}
-	Point(float x_, float y_)
+	Point(T x_, T y_)
 	{
 		x = x_;
 		y = y_;
 	}
 
-	vector<float> get() {
-		vector<float> v = { x,y };
+	vector<T> get() {
+		vector<T> v = { x,y };
 		return v;
 	}
-	friend bool operator==(const Point& p1, const Point& p2) {
+	friend bool operator==(const T& p1, const T& p2) {
 		if (p1.x == p2.x && p1.y == p2.y) return true;
 		else return false;
 	}
 };
 
-class Line
+
+
+template <typename T> class Line
 {
 private:
-	Point a, b;
+	Point<T> a, b;
 public:
 	Line() {
 		float x1, y1;
 		cout << "enter the data, cunty" << endl;
 		cin >> x1 >> y1;
-		a = Point(x1, y1);
+		a = Point<T>(x1, y1);
 		cin >> x1 >> y1;
-		b = Point(x1, y1);
+		b = Point<T>(x1, y1);
 
 	}
-	Line(Point a_, Point b_) {
+	Line(Point<T> a_, PointT b_) {
 		a = a_;
 		b = b_;
 
 	}
 
-	vector<Point> get() {
-		vector<Point> v = { a,b };
+	vector<Point<T>> get() {
+		vector<Point<T>> v = { a,b };
 		return v;
 	}
 
-	int IsIntersecLine(Line l1)
+	int IsIntersecLine(Line<T> l1)
 	{
 		float x2_ = l1.b.get()[0] - l1.a.get()[0];
 		float y2_ = l1.b.get()[1] - l1.a.get()[1];
@@ -85,7 +93,7 @@ public:
 		
 	}
 	
-	bool IsIntersecSegments(Line l1) {
+	bool IsIntersecSegments(Line<T> l1) {
 		float x2_ = l1.b.get()[0] - l1.a.get()[0];
 		float y2_ = l1.b.get()[1] - l1.a.get()[1];
 		float x1_ = b.get()[0] - a.get()[0];
@@ -135,22 +143,22 @@ public:
 
 	
 };
-
-Point CoordSegmentCenter(Point A, Point B);
-
-Point CoordCircleCenterAboutTrig(Point A, Point B);
+template <typename T>
+Point<T> CoordSegmentCenter(Point<T> A, Point<T> B);
+template <typename T>
+Point<T> CoordCircleCenterAboutTrig(Point<T> A, Point<T> B);
 
 int main()
 {
 
-	Point a(0, 0);
-	Point b(1, 0);
+	Point<float> a(0., 0.);
+	Point<float> b(1, 0);
 
-	Point c(0,1);
-	Point d(1, 2);
+	Point<float> c(0,1);
+	Point<float> d(1, 2);
 
-	Line l1(a, b);
-	Line l2(c, d);//
+	Line<float> l1(a, b);
+	Line<float> l2(c, d);//
 	
 	//cout << l1.IsIntersecLine(l2) << endl;
 	cout << "Is segments intersection? - "<< l1.IsIntersecSegments(l2) << endl;
@@ -159,8 +167,8 @@ int main()
 
 	return 0;
 }
-
-Point CoordSegmentCenter(Point A, Point B) 
+template <typename T>
+Point<T> CoordSegmentCenter(Point<T> A, Point<T> B) 
 {
 	float x, y;
 	float ax = A.get()[0], ay = A.get()[1], bx = B.get()[0], by = B.get()[1];
@@ -173,8 +181,8 @@ Point CoordSegmentCenter(Point A, Point B)
 	y = k * x + m;
 	return Point(x,y);
 }
-
-Point CoordCircleCenterAboutTrig(Point A, Point B)
+template <typename T>
+Point<T> CoordCircleCenterAboutTrig(Point<T> A, Point<T> B)
 {
 	
 }
