@@ -7,9 +7,7 @@ using namespace std;
 
 
 
-
-template <typename T>
-class Point
+template <typename T> class Point
 {
 private:
 	T x, y;
@@ -43,6 +41,7 @@ template <typename T> class Line
 {
 private:
 	Point<T> a, b;
+	vector<Point<T>> v = { b.get()[0] - a.get()[0],b.get()[1] - a.get()[1] };
 public:
 	Line() {
 		float x1, y1;
@@ -53,10 +52,19 @@ public:
 		b = Point<T>(x1, y1);
 
 	}
-	Line(Point<T> a_, PointT b_) {
+	Line(Point<T> a_, Point<T> b_) {
 		a = a_;
 		b = b_;
 
+	}
+
+	vector<Point<T>> getVector() {
+		//vector<Point<T>> v = { b.get()[0] - a.get()[0],b.get()[1] - a.get()[1] };
+		return v;
+	}
+
+	vector<Point<T>> getPointInLine() {
+		if()
 	}
 
 	vector<Point<T>> get() {
@@ -170,9 +178,10 @@ int main()
 template <typename T>
 Point<T> CoordSegmentCenter(Point<T> A, Point<T> B) 
 {
+	/*добавить проверку данных. а лучше - сделать функцию с вводом данных!*/
 	float x, y;
 	float ax = A.get()[0], ay = A.get()[1], bx = B.get()[0], by = B.get()[1];
-	vector<float> b = { B.get()[0] - A.get()[0] ,B.get()[1] - A.get()[1] };
+	vector<float> b = Line(A, B).getVector();
 	float k = b[1] / b[0];
 	float m = -k * ay / ax + ay;
 	float m1 = m - ay, m2 = m - by;
@@ -184,5 +193,7 @@ Point<T> CoordSegmentCenter(Point<T> A, Point<T> B)
 template <typename T>
 Point<T> CoordCircleCenterAboutTrig(Point<T> A, Point<T> B)
 {
-	
+	T bx = B.get()[0], by = B.get()[1];
+
+
 }
